@@ -1,0 +1,1 @@
+NotificationListener => Callback qui est exécuté à chaque fois qu'on se déplace dans notre listview.

@@ -3,6 +3,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:movie_flutter/models/movie.dart';
 import 'package:movie_flutter/repositories/data_repository.dart';
 import 'package:movie_flutter/services/api_service.dart';
+import 'package:movie_flutter/ui/widgets/movie_card.dart';
+import 'package:movie_flutter/ui/widgets/movie_category.dart';
 import 'package:movie_flutter/utils/constant.dart';
 import 'package:provider/provider.dart';
 
@@ -31,92 +33,30 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: ListView(
         children: [
-          Container(
+          SizedBox(
             height: 500,
-            color: const Color.fromARGB(255, 59, 2, 151),
-            child: dataProvider.popularMovieList.isEmpty
-                ? const Center()
-                : Image.network(dataProvider.popularMovieList[0].posterUrl(),
-                    fit: BoxFit.cover),
+            child: MovieCard(movie: dataProvider.popularMovieList.first),
           ),
-          const SizedBox(height: 15),
-          Text(
-            'Tendances actuelles',
-            style: GoogleFonts.poppins(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-            ),
+          MovieCategory(
+            imageHeight: 160,
+            imageWidth: 110,
+            label: 'Tendances Actuelles',
+            movieList: dataProvider.popularMovieList,
+            callback: dataProvider.getPopularMovies,
           ),
-          const SizedBox(height: 5),
-          SizedBox(
-            height: 160,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                    margin: const EdgeInsets.only(right: 8),
-                    width: 100,
-                    color: lstPurpleColor,
-                    child: dataProvider.popularMovieList.isEmpty
-                        ? Center(child: Text(index.toString()))
-                        : Image.network(
-                            dataProvider.popularMovieList[index].posterUrl(),
-                            fit: BoxFit.cover));
-              },
-            ),
+          MovieCategory(
+            imageHeight: 320,
+            imageWidth: 220,
+            label: 'Actuellement au cinéma',
+            movieList: dataProvider.nowPlaying,
+            callback: dataProvider.getNowPlaying,
           ),
-          const SizedBox(height: 15),
-          Text(
-            'Actuellement au cinéma',
-            style: GoogleFonts.poppins(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 5),
-          SizedBox(
-            height: 320,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  width: 220,
-                  color: lstYellowOrangeColor,
-                  child: Center(child: Text(index.toString())),
-                );
-              },
-            ),
-          ),
-          const SizedBox(height: 15),
-          Text(
-            'Bientôt disponible',
-            style: GoogleFonts.poppins(
-              color: Colors.white,
-              fontSize: 10,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          const SizedBox(height: 5),
-          SizedBox(
-            height: 160,
-            child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: const EdgeInsets.only(right: 8),
-                  width: 110,
-                  color: lstBlueColor,
-                  child: Center(child: Text(index.toString())),
-                );
-              },
-            ),
-          ),
+          /* MovieCategory(
+            imageHeight: 160,
+            imageWidth: 110,
+            label: 'Bientôt disponible',
+            movieList: dataProvider.popularMovieList,
+          ), */
         ],
       ),
     );
