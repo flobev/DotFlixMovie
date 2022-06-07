@@ -7,11 +7,14 @@ class DataRepository with ChangeNotifier {
   final ApiService apiService = ApiService();
   final List<Movie> _popularMovieList = [];
   int _popularMoviePageIndex = 1;
-  List<Movie> _nowPlaying = [];
+  final List<Movie> _nowPlaying = [];
   int _nowPlayingPageIndex = 1;
+  final List<Movie> _upcomingMovies = [];
+  int _upcomingMoviesPageIndex = 1;
 
   List<Movie> get popularMovieList => _popularMovieList;
   List<Movie> get nowPlaying => _nowPlaying;
+  List<Movie> get upcomingMovies => _upcomingMovies;
 
   Future<void> getPopularMovies() async {
     try {
@@ -39,8 +42,22 @@ class DataRepository with ChangeNotifier {
     }
   }
 
+  Future<void> getUpcomingMovies() async {
+    try {
+      List<Movie> movies = await apiService.getUpcomingMovies(
+          pageNumber: _upcomingMoviesPageIndex);
+      _upcomingMovies.addAll(movies);
+      _upcomingMoviesPageIndex++;
+      notifyListeners();
+    } on Response catch (response) {
+      print("ERROR: ${response.statusCode}");
+      rethrow;
+    }
+  }
+
   Future<void> initData() async {
     await getPopularMovies();
     await getNowPlaying();
+    await getUpcomingMovies();
   }
 }
