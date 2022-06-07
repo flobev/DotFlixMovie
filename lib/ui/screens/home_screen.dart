@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+// ignore: unused_import
 import 'package:google_fonts/google_fonts.dart';
+// ignore: unused_import
 import 'package:movie_flutter/models/movie.dart';
 import 'package:movie_flutter/repositories/data_repository.dart';
+// ignore: unused_import
 import 'package:movie_flutter/services/api_service.dart';
 import 'package:movie_flutter/ui/widgets/movie_card.dart';
 import 'package:movie_flutter/ui/widgets/movie_category.dart';

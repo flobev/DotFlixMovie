@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movie_flutter/repositories/data_repository.dart';
+// ignore: unused_import
 import 'package:movie_flutter/ui/screens/home_screen.dart';
 import 'package:movie_flutter/ui/screens/loading_screen.dart';
 import 'package:provider/provider.dart';

@@ -24,6 +24,7 @@ class DataRepository with ChangeNotifier {
       _popularMoviePageIndex++;
       notifyListeners();
     } on Response catch (response) {
+      // ignore: avoid_print
       print("ERROR: ${response.statusCode}");
       rethrow;
     }
@@ -37,6 +38,7 @@ class DataRepository with ChangeNotifier {
       _nowPlayingPageIndex++;
       notifyListeners();
     } on Response catch (response) {
+      // ignore: avoid_print
       print("ERROR: ${response.statusCode}");
       rethrow;
     }
@@ -50,6 +52,7 @@ class DataRepository with ChangeNotifier {
       _upcomingMoviesPageIndex++;
       notifyListeners();
     } on Response catch (response) {
+      // ignore: avoid_print
       print("ERROR: ${response.statusCode}");
       rethrow;
     }
